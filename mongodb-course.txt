@@ -1,0 +1,63 @@
+show dbs
+use database
+
+db.database.insertOne({"name":"name", "age": 10})
+
+Example
+db.dbtest.insertOne({"name":"Cult Of The Lamb", "genre":["Action", "Adventure", "Indie", "Strategy"], "developer":"Massive Monster", "Platforms":["PC", "PS4"]})
+
+db.database.find()
+db.database.find().pretty()
+
+BSON => Binary JSON, more efficent storage
+
+Example
+
+db.dbtest.insertOne({name:"F.I.S.T", genre:["Action", "Adventure", "Indie", "RPG", "Simulation"],developer:"TiGames",platforms:["PC", "PS4"]})
+
+*To replace an id must be "_id": (id)
+
+CRUD OPERATIONS =>
+
+CREATE
+
+- insertOne(data,options)
+- insertMany(data,options)
+
+READ
+
+- find(filter,options)
+- findOne(filter,filter)
+
+UPDATE
+
+- updateOne(filter, data,options)
+- updateMany(filter, data,options)
+
+DELETE
+
+- deleteOne(filter,options)
+- deleteMany(filter,filter)
+
+
+deleteOne
+
+db.dbtest.deleteOne({name:"Spyro"}) Can be the _id
+db.dbtest.deleteOne({_id: ObjectId('66ce2f846d1542f91a080b05')})
+
+updateOne
+
+Add data $set 
+db.dbtest.updateOne({ name: "F.I.S.T" }, { $set: { tags: "Metroidvania" } }) 
+db.dbtest.updateOne({ name: "Cult Of The Lamb" }, { $set: { tags: "Roguelike" } })
+
+db.dbtest.updateOne({ name: "Hollow Knight" }, { $set: { tags: "Metroidvania" } }) 
+db.dbtest.updateOne({ name: "Unravel" }, { $set: { tags: "Puzzles" } })
+
+Update data $rename
+db.dbtest.updateOne( {"_id": ObjectId ('66ce26196d1542f91a080b02') },{ $rename: { Platforms: "platforms" } }  ) 
+
+insertMany
+
+db.dbtest.insertMany([{"name": "Hollow Knight","genre": ["Action", "Adventure", "Indie"],"developer": "Team Cherry","platforms": ["PC", "PS4"]},{"name": "Unravel","genre": ["Action", "Adventure"],"developer": "Coldwood Interactive","platforms": ["PC", "PS4"]}])
+
