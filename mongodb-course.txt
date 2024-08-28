@@ -61,3 +61,10 @@ insertMany
 
 db.dbtest.insertMany([{"name": "Hollow Knight","genre": ["Action", "Adventure", "Indie"],"developer": "Team Cherry","platforms": ["PC", "PS4"]},{"name": "Unravel","genre": ["Action", "Adventure"],"developer": "Coldwood Interactive","platforms": ["PC", "PS4"]}])
 
+
+toArray
+db.pruebaDB.find().toArray
+
+
+forEach
+db.pruebaDB.find().forEach((pruebaData) => { printjson  ( pruebaData  )   }    )
