@@ -67,4 +67,57 @@ db.pruebaDB.find().toArray
 
 
 forEach
-db.pruebaDB.find().forEach((pruebaData) => { printjson  ( pruebaData  )   }    )
+db.pruebaDB.find().forEach( (pruebaData) => { printjson  ( pruebaData  )   }    )
+
+
+Index
+
+db.dbtest.find({}, {"name":1}).pretty()
+
+Array
+dbtest> db.dbtest.updateOne({ name: "Unravel" }, { $set: { tags: ["Puzzles", "Platform"] } })
+
+Index
+
+db.dbtest.findOne({"name": "F.I.S.T"}).genre
+db.dbtest.find({"name": "F.I.S.T"}).pretty()
+
+
+Drop
+
+use database
+db.dropDatabase()
+
+Schemas => Very different, Extra data or Full equality
+
+
+Text
+"Text"
+
+boolean
+True/False
+
+
+Integer(int32)
+25
+
+NumberLong(int64)
+1000000000
+
+NumberDecimal
+25.04
+
+ObjectId
+Unique
+
+Embedded Document
+("a", { } )
+
+Array
+("a", [ ] )
+
+ISODate
+ISODate("2024-09-03")
+
+Timestamp
+Timestamp(?)
