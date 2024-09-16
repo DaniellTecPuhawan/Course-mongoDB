@@ -121,3 +121,63 @@ ISODate("2024-09-03")
 
 Timestamp
 Timestamp(?)
+
+Example
+
+db.collectionName.insertOne({
+  _id: ObjectId('66d75dc17dba6dff0775bdb9'),
+  name: 'create1',
+  created: true,
+  details: [{ state: 'new' }, { creationStatus: 'recently' }],
+  creatingDate: ISODate('2024-09-03T19:04:33.715Z'),
+  createdAt: Timestamp(1725390273, 1)
+});
+
+- One to One
+
+db.personsDB.insertOne({name: "test", age:24})
+
+db.carsDB.insertOne({model: "BMW", price:24000, owner: ObjectId('66e20645eeb4c2fae7bcb27b') })
+
+- One to Many
+
+db.questionsDB.insertOne({creator: "test", question: "question", answers:["q1","q2"]})
+
+db.questionsDB.findOne()
+
+db.answersDB.insertMany([{_id:"q1", text:"text1"},{_id:"q2", text:"text2"}])
+
+db.answersDB.find()
+
+
+$lookup
+
+El operador $lookup es muy poderoso para combinar datos de múltiples colecciones sin necesidad de 
+realizar múltiples consultas, y es útil cuando se necesita realizar análisis o informes 
+complejos en MongoDB.
+
+Example
+
+db.lookup.aggregate([
+  {
+    $lookup: {
+      from: "lookups",       // Colección con la que nos unimos
+      localField: "lookup", // Campo en la colección 'orders'
+      foreignField: "_id",      // Campo en la colección 'products'
+      as: "lookupDetails"      // Nombre del nuevo campo con el resultado combinado
+    }
+  }
+]);
+
+db.lookup.aggregate([{$lookup: {from: "lookups", localField: "lookups", foreignField: "_id", as: "lookupsDetails"  }}]);
+
+
+Example:
+
+db.userCommentsDB.insertMany([{name:"test1", age:24, email:"test1@test.com"}, {name:"test2", age:25, email:"test2@test.com"}])
+db.userCommentsDB.find().pretty()
+db.postCommentsDB.insertOne({title:"Test post", text:"test", tag:["new, first comment"], owner: ObjectId('66e2f121eeb4c2fae7bcb282'), comments:["liked", "congrats"], owner:ObjectId('66e2f121eeb4c2fae7bcb281')})
+db.postCommentsDB.findOne()
+
+
+db.createCollection('postsDB',{validator:{$jsonSchema:{bsonType:'object',required:['title','text','creator','comments'],properties:{title:{bsonType:'string',description:'must be a string and is required'},text:{bsonType:'string',description:'must be a string and is required'},creator:{bsonType:'objectId',description:'must be an objectid and is required'},comments:{bsonType:'array',description:'must be an array and is required',items:{bsonType:'object',required:['text','author'],properties:{text:{bsonType:'string',description:'must be a string and is required'},author:{bsonType:'objectId',description:'must be an objectid and is required'}}}}}}}});
