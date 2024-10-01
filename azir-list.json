@@ -1,0 +1,37 @@
+{
+    "name": "Azir",
+    "title": "The Emperor of the Sands",
+    "lore": "Azir is a powerful Ascended being, who once was the Emperor of Shurima. Now, he seeks to restore his empire and reign over the desert sands.",
+    "role": "Mage",
+    "abilities": [
+      {
+        "name": "Passive - Shurima's Legacy",
+        "description": "Azir can summon the Sun Disc from the ruins of a turret, replacing it with a temporary tower."
+      },
+      {
+        "name": "Q - Conquering Sands",
+        "description": "Azir commands his soldiers to dash towards a target location, damaging and slowing enemies they pass through."
+      },
+      {
+        "name": "W - Arise!",
+        "description": "Azir summons a Sand Soldier to attack nearby enemies, dealing magic damage to targets within their range."
+      },
+      {
+        "name": "E - Shifting Sands",
+        "description": "Azir dashes to one of his Sand Soldiers, dealing magic damage to enemies he passes through. If he hits an enemy champion, he gains a shield."
+      },
+      {
+        "name": "R - Emperor's Divide",
+        "description": "Azir summons a wall of soldiers that charge forward, knocking back and blocking enemies. The wall acts as a barrier, preventing enemy dashes."
+      }
+    ],
+    "stats": {
+      "attackRange": "525",
+      "movementSpeed": "335",
+      "attackDamage": "52",
+      "attackSpeed": "0.625",
+      "armor": "19",
+      "magicResist": "30",
+      "health": "552"
+    }
+  }

@@ -194,7 +194,48 @@ w: "majority": Espera a que una mayoría de nodos confirme la escritura, proporc
 j: false: No espera la confirmación del journal, lo que mejora el rendimiento a cambio de un mayor riesgo de pérdida de datos 
 en caso de un fallo abrupto.
 
+w: 0: No espera ninguna confirmación. Máximo rendimiento, pero sin garantías de éxito.
+w: 1: Espera confirmación del nodo primario. Garantiza que la escritura ha sido exitosa en el nodo primario.
+w: 1, j: false: Espera confirmación del nodo primario, pero no del journal en disco. Menos durabilidad, pero mejor rendimiento.
+w: 1, j: true: Espera confirmación del nodo primario y también asegura que la escritura ha sido almacenada en el journal del disco. Mayor durabilidad y seguridad de los datos.
+
 db.pruebaDB.insertOne({name:"writeConcern1"}, {writeConcern:{w:0}})
 db.pruebaDB.insertOne({name:"writeConcern2"}, {writeConcern:{w:1}})
 db.pruebaDB.insertOne({name:"writeConcern3"}, {writeConcern:{w:1, j:false}})
 db.pruebaDB.insertOne({name:"writeConcern4"}, {writeConcern:{w:1, j:true}})
+
+Atomicity, prevents error when insertOne
+
+
+Example
+
+use companyTest
+db.companies.insertOne({name:"Fresh Food Inc", stock: 25, _id:1})
+db.companies.insertMany([{name:"Smart Cat Inc", stock:200, _id:2},{name: "Heavy Bear Inc", stock:50, _id:3}])
+db.companies.find().pretty()
+db.companies.insertMany([{name:"Fresh Air Inc", stock:10, _id:1},{name: "Cool Food Inc", stock:50, _id:4}])
+db.companies.insertMany([{name:"Smart Cat Inc", stock:200, _id:1},{name: "Heavy Bear Inc", stock:50, _id:4}], {ordered: false})
+db.companies.find().pretty()
+db.companies.insertOne({name: "Magic Tables", stock:150}, {writeConcern: {w:1, j:false}})
+
+
+Import Json
+
+mongoimport azir-list.json -d azirList -c azirlist --jsonArray --drop
+
+C:\Users\iamca\Desktop\Course-mongoDB\azir-list.json -d azirList -c azirlist --jsonArray --drop
+
+- mongoimport: Es la herramienta de MongoDB que se utiliza para importar datos desde 
+un archivo externo a una base de datos de MongoDB.
+
+-d azirList: Especifica el nombre de la base de datos a la que se importarán los datos. Aquí, la base de datos se llama azirList
+
+-c azirlist: Especifica el nombre de la colección dentro de la base de datos a la que se van a importar los datos. 
+
+--jsonArray: Indica que el archivo azir-list.json contiene un array de objetos JSON.
+
+--drop: Esta opción le dice a MongoDB que elimine la colección azirlist antes de importar los datos.
+
+db.azirlist.insertMany([{"name":"Azir","role":"Mage","abilities":[{"name":"Shurima's Legacy","description":"Summons a turret from the ruins of an allied turret."},{"name":"Conquering Sands","description":"Commands soldiers to charge in a line."},{"name":"Arise!","description":"Summons a Sand Soldier to attack enemies."},{"name":"Shifting Sands","description":"Dashes to one of his soldiers."},{"name":"Emperor's Divide","description":"Summons a wall of soldiers to knock back enemies."}]}])
+
+show collections
