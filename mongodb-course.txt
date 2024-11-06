@@ -239,3 +239,92 @@ un archivo externo a una base de datos de MongoDB.
 db.azirlist.insertMany([{"name":"Azir","role":"Mage","abilities":[{"name":"Shurima's Legacy","description":"Summons a turret from the ruins of an allied turret."},{"name":"Conquering Sands","description":"Commands soldiers to charge in a line."},{"name":"Arise!","description":"Summons a Sand Soldier to attack enemies."},{"name":"Shifting Sands","description":"Dashes to one of his soldiers."},{"name":"Emperor's Divide","description":"Summons a wall of soldiers to knock back enemies."}]}])
 
 show collections
+
+
+
+Operators:
+
+db.numbersDB.insertMany([{"numero": 1}, {"numero": 2}, {"numero": 3}, {"numero": 4}, {"numero": 5}, {"numero": 6}, {"numero": 7}, {"numero": 8}, {"numero": 9}, {"numero": 10}])
+
+REGULAR EXPRESSIONS
+
+Operadores de comparación
+$eq: Igual a (Equal to)
+$ne: No igual a (Not equal to)
+$gt: Mayor que (Greater than)
+$gte: Mayor o igual que (Greater than or equal to)
+$lt: Menor que (Less than)
+$lte: Menor o igual que (Less than or equal to)
+
+db.numbersDB.find().count()
+
+db.numbersDB.find({numero: { $gt: 3  }})
+db.numbersDB.find({numero: { $lt: 8  }})  
+db.numbersDB.find({$and: [{ numero: { $gt: 3 } }, { numero: { $lt: 8 } }]});
+db.numbersDB.find({numero: { $not: { $gt: 6 } }});
+db.numbersDB.find({ numero: { $ne: 5 } });
+db.numbersDB.find({ numero: { $type: "int" } }); //ver elementos que cumplan el filtro
+
+db.operatorsDB.insertMany([{
+      nombre: "Juan",            
+      edad: 25,                  
+      activo: true,             
+      direccion: {               
+         calle: "Calle Falsa 123",
+         ciudad: "Madrid",
+         codigo_postal: 28001
+      },
+      contacto: {                
+         email: "juan@example.com",
+         telefono: "123456789"
+      },
+      preferencias: {            
+         suscripcion: true,
+         temas: ["tecnología", "deporte"]
+      }
+   },
+   {
+      nombre: "Ana",
+      edad: 30,                  
+      activo: false,            
+      direccion: {              
+         calle: "Avenida Siempreviva 742",
+         ciudad: "Barcelona",
+         codigo_postal: 08001
+      },
+      empleo: {                  
+         puesto: "Ingeniera de Software",
+         empresa: "Tech Solutions"
+      },
+      preferencias: {
+         suscripcion: false,
+         temas: ["arte", "música"]
+      }
+   },
+   {
+      nombre: "Luis",
+      edad: 40,
+      activo: true,
+      direccion: {
+         calle: "Gran Vía 15",
+         ciudad: "Valencia",
+         codigo_postal: 46001
+      },
+      contacto: {
+         email: "luis@example.com",
+         telefono: "987654321"
+      },
+      empleo: {
+         puesto: "Analista de Datos",
+         empresa: "Data Insights"
+      }
+   }
+]);
+
+db.operatorsDB.insertMany([{nombre: "Juan", edad: 25, activo: true, direccion: {calle: "Calle Falsa 123", ciudad: "Madrid", codigo_postal: 28001}, contacto: {email: "juan@example.com", telefono: "123456789"}, preferencias: {suscripcion: true, temas: ["tecnología", "deporte"]}}, {nombre: "Ana", edad: 30, activo: false, direccion: {calle: "Avenida Siempreviva 742", ciudad: "Barcelona", codigo_postal: 08001}, empleo: {puesto: "Ingeniera de Software", empresa: "Tech Solutions"}, preferencias: {suscripcion: false, temas: ["arte", "música"]}}, {nombre: "Luis", edad: 40, activo: true, direccion: {calle: "Gran Vía 15", ciudad: "Valencia", codigo_postal: 46001}, contacto: {email: "luis@example.com", telefono: "987654321"}, empleo: {puesto: "Analista de Datos", empresa: "Data Insights"}}]);
+
+
+
+$jsonSchema
+
+db.operatorsDB.find( {calle: {$regex: /calle/}}  ).pretty()
