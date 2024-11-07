@@ -246,7 +246,7 @@ Operators:
 
 db.numbersDB.insertMany([{"numero": 1}, {"numero": 2}, {"numero": 3}, {"numero": 4}, {"numero": 5}, {"numero": 6}, {"numero": 7}, {"numero": 8}, {"numero": 9}, {"numero": 10}])
 
-REGULAR EXPRESSIONS
+OPERATORS
 
 Operadores de comparación
 $eq: Igual a (Equal to)
@@ -327,4 +327,18 @@ db.operatorsDB.insertMany([{nombre: "Juan", edad: 25, activo: true, direccion: {
 
 $jsonSchema
 
-db.operatorsDB.find( {calle: {$regex: /calle/}}  ).pretty()
+db.dbtest.find( {tags: {$regex: /Roguelike/}}  ).pretty()
+
+db.dbtest.find( {$expr: {$gt:["Metroidvania", "Puzzles"]} }  ).pretty() ??
+
+
+
+db.officeDB.insertMany[ { "title":  "The Last Student Returns", "meta": { "rating": 9.5, "aired": 2018, "runtime": 100 }, "visitors": 1300000, "expectedVisitors": 1550000, "genre": ["thriller", "drama", "action"] }, { "title": "Supercharged Teaching", "meta": { "rating": 9.3, "aired": 2016, "runtime": 60 }, "visitors": 370000, "expectedVisitors": 1000000, "genre": ["thriller", "action"] }, { "title": "Teach me if you can", "meta": { "rating": 8.5, "aired": 2014, "runtime": 90 }, "visitors": 590378, "expectedVisitors": 500000, "genre": ["action", "thriller"] } ]
+
+db.officeDB.find({$and: [{ "meta.rating": { $gt: 9.2 } }, { "meta.runtime": { $lt: 100 } }]});
+
+db.officeDB.find({ genre: { $all: ["drama", "action"] } })
+
+db.officeDB.find({ $expr: { $gt: ["$visitors", "$expectedVisitors"] } });
+
+
