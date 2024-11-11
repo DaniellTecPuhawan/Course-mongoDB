@@ -332,13 +332,24 @@ db.dbtest.find( {tags: {$regex: /Roguelike/}}  ).pretty()
 db.dbtest.find( {$expr: {$gt:["Metroidvania", "Puzzles"]} }  ).pretty() ??
 
 
+- Test
 
 db.officeDB.insertMany[ { "title":  "The Last Student Returns", "meta": { "rating": 9.5, "aired": 2018, "runtime": 100 }, "visitors": 1300000, "expectedVisitors": 1550000, "genre": ["thriller", "drama", "action"] }, { "title": "Supercharged Teaching", "meta": { "rating": 9.3, "aired": 2016, "runtime": 60 }, "visitors": 370000, "expectedVisitors": 1000000, "genre": ["thriller", "action"] }, { "title": "Teach me if you can", "meta": { "rating": 8.5, "aired": 2014, "runtime": 90 }, "visitors": 590378, "expectedVisitors": 500000, "genre": ["action", "thriller"] } ]
 
-db.officeDB.find({$and: [{ "meta.rating": { $gt: 9.2 } }, { "meta.runtime": { $lt: 100 } }]});
+db.officeDB.find({$and: [{ "meta.rating": { $gt: 9.2 } }, { "meta.runtime": { $lt: 100 } }]}).pretty();
 
-db.officeDB.find({ genre: { $all: ["drama", "action"] } })
+db.officeDB.find({ genre: { $all: ["drama", "action"] } }).pretty()
 
 db.officeDB.find({ $expr: { $gt: ["$visitors", "$expectedVisitors"] } });
+
+
+- 
+
+db.officeDB.find( {genre: {$size:3}} ).pretty()
+db.elemMatch.insertMany([{ "name": "Carlos", "scores": [ { "subject": "Math", "score": 85 }, { "subject": "History", "score": 92 }, { "subject": "Science", "score": 78 } ] }, { "name": "Ana", "scores": [ { "subject": "Math", "score": 95 }, { "subject": "History", "score": 88 }, { "subject": "Science", "score": 91 } ] }]);
+db.elemMatch.find({scores: { $elemMatch: { subject: "History", score: { $gt: 90 } } }});
+
+
+
 
 
